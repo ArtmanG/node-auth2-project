@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { generateToken } = require('../middleware/middleware')
 
-const Users = require('../users/user-model');
+const Users = require('../users/users-model');
 
 router.post('/register', (req, res) => {
     let user = req.body;
@@ -26,16 +27,17 @@ router.post('/login', (req, res) => {
 
     Users.findBy({ username })
         .then(([user]) => {
-            if (user && bcrypt.compareSync(password, user[0].password)) {
-                const token = generateToken(user[0]);
-
-                req.session.loggedIn = true;
+            if (user && bcrypt.compareSync(password, user.password)) {
+                const token = generateToken(user);
+                
                 res.status(200).json({ 
                     message: `Welcome ${user.username}!`,
                     token: token, 
                 });
             } else {
-                res.status(401).json({ message: 'You shall not pass!(Login)' });
+                res.status(401).json({ 
+                    message: 'You shall not pass!(Login)' 
+                });
             }
         })
         .catch(error => {

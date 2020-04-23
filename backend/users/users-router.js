@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const Users = require('./user-model.js');
+const Users = require('./users-model.js');
 
 router.get('/', (req, res) => {
     const department = {department: req.decodedToken.department}

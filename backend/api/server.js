@@ -1,9 +1,8 @@
-require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const cors = require('cors');
 
-const usersRouter = require('../users/user-router');
+const usersRouter = require('../users/users-router');
 const authRouter = require('../auth/auth-router.js');
 const { authMiddleware } = require('../middleware/middleware');
 

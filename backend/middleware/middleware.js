@@ -7,7 +7,7 @@ function generateToken(user) {
         username: user.username,
         department: user.department
     };
-    const secret = process.env.JWT_SECRET || jwtSecret;
+    const secret = jwtSecret;
     const options = {
         expiresIn: '1d'
     };
@@ -16,8 +16,8 @@ function generateToken(user) {
 };
 
 function authMiddleware (req, res, next) {
-    const token =  req.headers.authorization
-    const secret = process.env.JWT_SECRET || jwtSecret
+    const token =  req.headers.authorization;
+    const secret = jwtSecret;
     
     if(token) {
         jwt.verify(token, secret, (error, decodedToken) => {
@@ -29,10 +29,10 @@ function authMiddleware (req, res, next) {
             }
         })
     } else {
-        res.status(401).json({message: "Gotta Sign in"})
+        res.status(401).json({message: "Please provide credentials"})
     }
 };
 
-module.exports = { generateToken, authMiddleware}
+module.exports = { generateToken, authMiddleware }
 
 
