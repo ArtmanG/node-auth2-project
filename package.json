@@ -32,5 +32,8 @@
   "bugs": {
     "url": "https://github.com/ArtmanG/node-auth2-project/issues"
   },
-  "homepage": "https://github.com/ArtmanG/node-auth2-project#readme"
+  "homepage": "https://github.com/ArtmanG/node-auth2-project#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
